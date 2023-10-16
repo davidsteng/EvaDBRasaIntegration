@@ -18,7 +18,7 @@ class ActionEVADB(Action):
 
     def run (self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         cursor = evadb.connect().cursor()
-        open_ai_key = os.environ.get('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')
+        open_ai_key = os.environ.get('Haha i just realised i should probably hide my openai key before bad things happens')
         #pd.set_option('display.max_colwidth', None)
         print(Path.cwd())
         print(tracker.get_slot('name'))
