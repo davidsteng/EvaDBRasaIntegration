@@ -7,12 +7,19 @@ from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 from pathlib import Path
+import requests
+from rasa_sdk.events import SlotSet
+import openai
+import json
+
 class ActionEVADB(Action):
     def name(self) -> Text:
         return "evadb_connect"
 
     def run (self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         cursor = evadb.connect().cursor()
+        open_ai_key = os.environ.get('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')
+        #pd.set_option('display.max_colwidth', None)
         print(Path.cwd())
         print(tracker.get_slot('name'))
         name = tracker.get_slot('name')
@@ -20,11 +27,11 @@ class ActionEVADB(Action):
             dispatcher.utter_message("The name of the person you are asking about could not be located")
             return []
         lname = tracker.get_slot('lname')
-        if lname = "":
+        if lname == "":
             dispatcher.utter_message("The name of the person you are asking about could not be located")
             return []
         queryFor = tracker.get_slot('info_type')
-        if queryFor != state and queryFor != zip and queryFor != city and queryFor != address:
+        if queryFor != 'state' and queryFor != 'zip' and queryFor != 'city' and queryFor != 'address':
             dispatcher.utter_message("You are not looking for a valid piece of data")
             return []
         #sql = """CREATE DATABASE sqlite_data WITH ENGINE = 'sqlite', PARAMETERS = {
@@ -47,6 +54,15 @@ class ActionEVADB(Action):
         print(cursor.query(f'SELECT addresses.{queryFor} FROM Addresses WHERE addresses.first = \'{name}\' AND addresses.last = \'{lname}\';').df().values)
         temp = cursor.query(f'SELECT addresses.{queryFor} FROM Addresses WHERE addresses.first = \'{name}\' AND addresses.last = \'{lname}\';').df().values
         #temp now has correct info
+        #Why the hell does drop table error out??? WHere is table data stored????
+        #cursor.query("DROP TABLE IF EXISTS TEXT_SUMMARY").df()
+        cursor.query("""CREATE TABLE IF NOT EXISTS TEXTSUMM (summary TEXT(1000))""").df()
+        #print(cursor.query(text_summarization_query).df())
+        chatgpt_udf = """
+            SELECT ChatGPT('Is this summary related to Ukraine russia war', summary) 
+            FROM TEXTSUMM;
+        """
+        print(cursor.query(chatgpt_udf).df())
         if temp.size == 0:
             dispatcher.utter_message("The name of the person you are asking about could not be located")
             return []

@@ -17,3 +17,8 @@ rules:
   - intent: eva_query
   - action: evadb_connect
 
+#- rule: get distance
+#  steps:
+#  - intent: openAI
+#  - action: retrieveDist
+

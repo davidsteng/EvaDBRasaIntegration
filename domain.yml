@@ -10,9 +10,11 @@ intents:
   - bot_challenge
   - evadb
   - eva_query
+  - openAI
 
 actions:
   - evadb_connect
+#  - retrieveDist
 
 entities:
   - info_type
@@ -41,7 +43,7 @@ slots:
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey!"
 
   utter_evadb_path:
   - text: Beginning EvaDB story path

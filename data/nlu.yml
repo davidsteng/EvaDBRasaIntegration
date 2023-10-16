@@ -101,3 +101,9 @@ nlu:
     - Give me the [address](info_type) of [John](name) [Doe](lname)
     - I'd like the [Zip Code](info_type) of [Joan](name) [Anne](lname)
     - [state](info_type) of [Blank](name) [Blankman](lname)
+
+#- intent: openAI
+#  examples: |
+#    - Which of the following shops is closest?
+#    - Which of the best rated restaurants is closest to me?
+#    - Shortest distance to me
