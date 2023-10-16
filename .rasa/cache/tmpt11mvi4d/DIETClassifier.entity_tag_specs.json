@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-info_type",
+      "2": "I-info_type",
+      "3": "L-info_type",
+      "4": "U-info_type",
+      "5": "B-lname",
+      "6": "I-lname",
+      "7": "L-lname",
+      "8": "U-lname",
+      "9": "B-name",
+      "10": "I-name",
+      "11": "L-name",
+      "12": "U-name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-info_type": 1,
+      "I-info_type": 2,
+      "L-info_type": 3,
+      "U-info_type": 4,
+      "B-lname": 5,
+      "I-lname": 6,
+      "L-lname": 7,
+      "U-lname": 8,
+      "B-name": 9,
+      "I-name": 10,
+      "L-name": 11,
+      "U-name": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]
