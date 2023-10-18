@@ -1,0 +1,13 @@
+Due to the large number of imports I had to add to properly implement rasa and eva synergization I am not completely sure of the full dependicies I had to install.
+Additionally, there were potentially some necessary dependencies that I already had on my local system
+At some point it was a process of:
+recieving error
+running pip install to remove error
+repeat process
+however the two main key dependicies were
+Running
+pip3 install rasa should install most basic rasa dependicies
+For eva
+pip install evadb
+pip install evadb[document]
+pip install evadb[ludwig]
